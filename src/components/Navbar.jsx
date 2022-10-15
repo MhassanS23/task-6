@@ -39,7 +39,7 @@ const Navbars = () => {
     const handleSubmit = async (e) =>{
         e.preventDefault();
         try {
-        const res = await axios.post("http://notflixtv.herokuapp.com/api/v1/users/login",{email : email, password : password,});
+        const res = await axios.post("https://notflixtv.herokuapp.com/api/v1/users/login",{email : email, password : password,});
         localStorage.setItem('user', JSON.stringify(res.data.data));
         localStorage.setItem('isLoggedin', true)
         setEmail('');
@@ -67,7 +67,7 @@ const Navbars = () => {
         checkPass();
         checkPassCon();
         try {
-        const res = await axios.post("http://notflixtv.herokuapp.com/api/v1/users",
+        const res = await axios.post("https://notflixtv.herokuapp.com/api/v1/users",
         {
             first_name: firstName,
             last_name: lastName,
