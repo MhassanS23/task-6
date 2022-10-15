@@ -1,0 +1,330 @@
+.header{
+  padding: 0rem 2rem 1rem 2rem;
+  position: fixed;
+  z-index: 99;
+  overflow: hidden;
+  color: white;
+  width: 100%;
+}
+
+
+.carousel-item img{
+  width: 100%;
+  height: 100vh;
+}
+
+.carousel-caption{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+  top: 18rem;
+}
+
+.carousel-caption p{
+  font-size: 1.5rem;
+  text-align: left;
+}
+
+
+.navbars{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbars .logo h1{
+  font-size: 3rem;
+  font-weight: 1000;
+  color: red;
+}
+
+.container-form {
+  width: 30rem;
+  height: 2.5rem;
+  border: 1px solid rgb(247, 53, 53);
+  border-radius: 2rem;
+  display: grid;
+  grid-template-columns: 90% 10%;
+}
+
+.container-form .search{
+  background-color: transparent;
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  border-right: none;
+  border-left: 1px solid rgb(247, 53, 53);
+  border-top: 1px solid rgb(247, 53, 53);
+  border-bottom: 1px solid rgb(247, 53, 53);
+  color: white;
+}
+
+input::placeholder{
+  color: white;
+  padding: 1rem;
+}
+
+.container-form .btn-search{
+  background-color: transparent;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  border-left: none;
+  border-right: 1px solid rgb(247, 53, 53);
+  border-top: 1px solid rgb(247, 53, 53);
+  border-bottom: 1px solid rgb(247, 53, 53);
+  color: white;
+}
+
+.containerHome{
+  width: 100%;
+  height: 100vh;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.card-grid{
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  margin: 2rem 1rem 1rem 5rem;
+  padding: 0;
+  gap: 2rem;
+  cursor: pointer;
+}
+
+
+.header-listMovie{
+  padding: 1rem;
+  margin: 1rem 5.5rem 2rem 4rem;
+}
+
+.navbars .link-allMovie{
+  color: red;
+  text-decoration: none;
+}
+
+.login{
+  border: 1px solid rgb(247, 53, 53);
+  color: white;
+  border-radius: 2rem;
+  background-color: transparent;
+  width: 6.5rem;
+  padding: 0.5rem;
+  margin-right: 1rem;
+}
+
+.register{
+  border: 1px solid rgb(247, 53, 53);
+  color: white;
+  border-radius: 2rem;
+  background-color: rgb(247, 53, 53);
+  width: 6.5rem;
+  padding: 0.5rem;
+  margin-right: 1rem;
+}
+
+.tombol-trailer{
+  border: 1px solid rgb(247, 53, 53);
+  color: white;
+  border-radius: 2rem;
+  background-color: rgb(247, 53, 53);
+  width: 11rem;
+  padding: 0.5rem;
+  margin-right: 1rem;
+}
+
+.picFilm{
+  width: 100%;
+  height: 100vh;
+}
+
+.detail{
+  position: absolute;
+  top: 10rem;
+  left: 8rem;
+  color: white;
+}
+
+.title-film h1{
+  font-size: 5rem;
+  font-weight: 1000;
+}
+
+.movie-genre{
+  background-color: transparent;
+  border-radius: 1rem;
+  border:  1px solid rgb(247, 53, 53);
+  padding: 0.5rem;
+  margin-right: 1rem;
+}
+
+.movie-genre-container{
+  margin-top: 1rem;
+}
+
+.preview-film{
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.rating-film{
+  display: flex;
+  gap: 0.5rem;
+  font-weight: 700;
+}
+
+.fa-star{
+  color: rgb(243, 247, 10);
+}
+
+.search-header{
+  width: 100%;
+  height: 50%;
+}
+
+.search-header img{
+  width: 100%;
+  height: 60vh;
+}
+
+.tulisan-pojok{
+  margin: 4rem 1rem 2rem 5rem;
+}
+
+.tulisan-pojok-img{
+  color: white;
+  position: absolute;
+  top: 15rem;
+  left: 5rem;
+}
+
+.tulisan-pojok-img h1{
+  font-size: 4rem;
+}
+
+.notfound{
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.swiper-wrapper{
+  margin-left: 4rem;
+}
+
+.container-category{
+  width: 100%;
+  margin-top: 2rem;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+}
+
+.btn-category{
+  width: 9rem;
+  background-color: transparent;
+  border-radius: 1rem;
+  border:  1px solid rgb(247, 53, 53);
+  padding: 0.5rem;
+  color: red;
+}
+
+.logo a{
+  text-decoration: none;
+}
+
+.modal-body .row{
+  gap: 2rem;
+}
+
+.modal-body .form-control{
+  border-radius: 2rem;
+  padding: 1rem;
+}
+
+.password-toggle-icon{
+  position: absolute;
+  top: 7.79rem;
+  right: 2.295rem;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.password-toggle-icon1{
+  position: absolute;
+  top: 19rem;
+  right: 2.295rem;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.password-toggle-icon2{
+  position: absolute;
+  top: 24.70rem;
+  right: 2.295rem;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.user1{
+  position: absolute;
+  top: 2rem;
+  right: 2.295rem;
+  z-index: 800;
+  cursor: pointer;
+}
+.user2{
+  position: absolute;
+  top: 7.8rem;
+  right: 2.295rem;
+  z-index: 800;
+  cursor: pointer;
+}
+
+.mail{
+  position: absolute;
+  top: 2rem;
+  right: 2.295rem;
+  z-index: 900;
+  cursor: pointer;
+}
+
+.mail2{
+  position: absolute;
+  top: 13.4rem;
+  right: 2.295rem;
+  z-index: 900;
+  cursor: pointer;
+}
+
+.submit{
+  width: 9rem;
+  background-color:  rgb(247, 53, 53);
+  border-radius: 1rem;
+  border:  1px solid rgb(247, 53, 53);
+  padding: 0.5rem;
+  color: white;
+}
+
+.error{
+  position: absolute;
+  color:red;
+  margin-left: 1rem;
+  z-index: 500;
+  cursor: pointer;
+}
+
+.menu2{
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.signout{
+  width: 7rem;
+  background-color:  rgb(247, 53, 53);
+  border-radius: 1rem;
+  border:  1px solid rgb(247, 53, 53);
+  padding: 0.5rem;
+  color: white;
+}
