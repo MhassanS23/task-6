@@ -10,6 +10,20 @@ import {useState, useEffect} from 'react'
 import {Modal, ModalHeader, Row, ModalBody, Col} from 'reactstrap'
 import usePasswordToggles from './usePasswordToggle'
 import axios from 'axios'
+import { GoogleLogin } from 'react-google-login';
+import { gapi } from 'gapi-script';
+
+
+const responseGoogle = (response) => {
+  console.log(response);
+  localStorage.setItem('token', JSON.stringify(response.accessToken));
+}
+gapi.load("client:auth2",()=>{
+    gapi.auth2.init({
+        clientId:"414434174427-nic0jjfbcvqaubflqajvvs5gedceip02.apps.googleusercontent.com",
+        plugin_name:"",
+    });
+});
 
 const Navbars = () => {
     const navigate = useNavigate();
@@ -199,6 +213,13 @@ const Navbars = () => {
                         </Col>
                         <Col>
                             <button className="submit" type='submit'>Login</button>
+                            <GoogleLogin
+                            clientId="414434174427-nic0jjfbcvqaubflqajvvs5gedceip02.apps.googleusercontent.com"
+                            buttonText="Login"
+                            onSuccess={responseGoogle}
+                            onFailure={responseGoogle}
+                            cookiePolicy={'single_host_origin'}
+                            />
                         </Col>
                     </Row>
                 </form>
