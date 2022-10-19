@@ -302,7 +302,13 @@ input::placeholder{
   border-radius: 1rem;
   border:  1px solid rgb(247, 53, 53);
   padding: 0.5rem;
+  box-shadow: rgb(128, 121, 121);
   color: white;
+}
+
+.submit:hover{
+  background-color: rgb(128, 121, 121);
+  border: white;
 }
 
 .error{
@@ -327,4 +333,18 @@ input::placeholder{
   border:  1px solid rgb(247, 53, 53);
   padding: 0.5rem;
   color: white;
+}
+
+.button-form-login{
+  display: flex;
+  gap: 4rem;
+}
+
+.button-form-login .google{
+  width: 10rem;
+}
+
+
+.modal3 h1{
+  text-align: center;
 }

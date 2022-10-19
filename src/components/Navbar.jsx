@@ -14,10 +14,7 @@ import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
 
 
-const responseGoogle = (response) => {
-  console.log(response);
-  localStorage.setItem('token', JSON.stringify(response.accessToken));
-}
+
 gapi.load("client:auth2",()=>{
     gapi.auth2.init({
         clientId:"414434174427-nic0jjfbcvqaubflqajvvs5gedceip02.apps.googleusercontent.com",
@@ -37,6 +34,7 @@ const Navbars = () => {
     const [passConfir, setPasswordconfir] = useState("")
     const [modal, setModal] = useState(false)
     const [modal2, setModal2] = useState(false)
+    const [modal3, setModal3] = useState(false)
     const [PasswordInputType, ToggleIcon] = usePasswordToggles();
     const [PasswordInputType2, ToggleIcon2] = usePasswordToggles();
     const regexEmail = /^([a-z\d\.-]+)@([a-z\d-]+)\.(co[m]?)(\.[a-z]{2})?$/;
@@ -45,29 +43,47 @@ const Navbars = () => {
     const [errFirstN, setErrorFirstN] = useState('')
     const [errLastN, setErrorLastN] = useState('')
     const [errPassCon, setErrorPassCon] = useState('')
-    const [isLogin, setIslogin] = useState(false)
-    const [namaDepan, setNamadepan] = useState()
-    const [namaBelakang, setNamabelakang] = useState()
+    const [Error, setError] = useState('')
     const loggedIn = localStorage.getItem('isLoggedin');
+    const profilNama = localStorage.getItem('profile');
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
         try {
         const res = await axios.post("https://notflixtv.herokuapp.com/api/v1/users/login",{email : email, password : password,});
-        localStorage.setItem('user', JSON.stringify(res.data.data));
+        localStorage.setItem('token', JSON.stringify(res.data.data));
         localStorage.setItem('isLoggedin', true)
+        console.log(res)
         setEmail('');
         setPassword('');
         setModal(false)
-        setNamadepan(res.data.data.first_name)
-        setNamabelakang(res.data.data.last_name)
+        localStorage.setItem('profile', `${res.data.data.first_name} ${res.data.data.last_name}`);
         } catch (error) {
+            if(error.response.data.statusCode == 422){
+                setError('Please fill the Form')
+                setModal3(true)
+            }else if(error.response.data.statusCode == 400){
+                setError('Account not Registered or Email and Password not Match')
+                setModal3(true)
+            }else{
+                setError('Registration Failed')
+                setModal3(true)
+            }
         }
     }
 
+    const responseGoogle = (response) => {
+        console.log(response)
+        localStorage.setItem('token', response.accessToken);
+        localStorage.setItem('isLoggedin', true)
+        localStorage.setItem('profile', response.profileObj.givenName);
+        setModal(false)
+      }
+
     const signout = () => {
         localStorage.removeItem('isLoggedin')
-        localStorage.removeItem('user')
+        localStorage.removeItem('token')
+        localStorage.removeItem('profile')
         navigate('/')
     }
 
@@ -97,11 +113,21 @@ const Navbars = () => {
         setPasswordconfir('');
         setModal2(false)
         } catch (error) {
+            if(error.response.data.statusCode == 422){
+                setError('Please fill the Form')
+                setModal3(true)
+            }else if(error.response.data.statusCode == 400){
+                setError('Email Already Registered')
+                setModal3(true)
+            }else{
+                setError('Registration Failed')
+                setModal3(true)
+            }
         }
     }
 
     const checkEmail = () => {
-        if(emailRegis == ''){
+        if(emailRegis == '' ){
             setErroremail('Please fill email address')
         }else if(regexEmail.test(emailRegis)=== false){
             setErroremail('Please enter valid email address')
@@ -144,8 +170,6 @@ const Navbars = () => {
             setErrorLastN('');
         }
     }
-
-    // console.log(res)
         
     
     const submit = () => {
@@ -173,7 +197,7 @@ const Navbars = () => {
             {loggedIn ?  
                 <div className="menu2">
                     <span><FontAwesomeIcon icon={faUser} /></span>
-                    <h3>{namaDepan} {namaBelakang}</h3>
+                    <h3> {profilNama} </h3>
                     <button className='signout' onClick={signout}>Logout</button>
                 </div>
             :  
@@ -184,6 +208,22 @@ const Navbars = () => {
             }
             
         </div>
+        <Modal
+            size='md'
+            isOpen={modal3}
+            toggle={()=> setModal3(!modal3)}
+            centered={true}
+            className='modal3'
+        >
+            <ModalHeader
+                toggle={()=> setModal3(!modal3)}
+            >
+                Error
+            </ModalHeader>
+            <ModalBody>
+                <h1>{Error}</h1>
+            </ModalBody>
+        </Modal>
         <Modal
             size='lg'
             isOpen={modal}
@@ -211,10 +251,11 @@ const Navbars = () => {
                                 </span>
                             </div>
                         </Col>
-                        <Col>
+                        <Col className="button-form-login">
                             <button className="submit" type='submit'>Login</button>
                             <GoogleLogin
                             clientId="414434174427-nic0jjfbcvqaubflqajvvs5gedceip02.apps.googleusercontent.com"
+                            className="google"
                             buttonText="Login"
                             onSuccess={responseGoogle}
                             onFailure={responseGoogle}
