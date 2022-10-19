@@ -10,17 +10,10 @@ import {useState, useEffect} from 'react'
 import {Modal, ModalHeader, Row, ModalBody, Col} from 'reactstrap'
 import usePasswordToggles from './usePasswordToggle'
 import axios from 'axios'
-import { GoogleLogin } from 'react-google-login';
-import { gapi } from 'gapi-script';
+import { GoogleLogin } from '@react-oauth/google';
 
 
 
-gapi.load("client:auth2",()=>{
-    gapi.auth2.init({
-        clientId:"414434174427-nic0jjfbcvqaubflqajvvs5gedceip02.apps.googleusercontent.com",
-        plugin_name:"",
-    });
-});
 
 const Navbars = () => {
     const navigate = useNavigate();
@@ -72,13 +65,6 @@ const Navbars = () => {
         }
     }
 
-    const responseGoogle = (response) => {
-        console.log(response)
-        localStorage.setItem('token', response.accessToken);
-        localStorage.setItem('isLoggedin', true)
-        localStorage.setItem('profile', response.profileObj.givenName);
-        setModal(false)
-      }
 
     const signout = () => {
         localStorage.removeItem('isLoggedin')
@@ -254,12 +240,16 @@ const Navbars = () => {
                         <Col className="button-form-login">
                             <button className="submit" type='submit'>Login</button>
                             <GoogleLogin
-                            clientId="414434174427-nic0jjfbcvqaubflqajvvs5gedceip02.apps.googleusercontent.com"
-                            className="google"
-                            buttonText="Login"
-                            onSuccess={responseGoogle}
-                            onFailure={responseGoogle}
-                            cookiePolicy={'single_host_origin'}
+                            onSuccess={credentialResponse => {
+                                console.log(credentialResponse);
+                                localStorage.setItem('token', JSON.stringify(credentialResponse.credential));
+                                localStorage.setItem('isLoggedin', true)
+                                localStorage.setItem('profile', "Google User");
+                                setModal(false)
+                            }}
+                            onError={() => {
+                                console.log('Login Failed');
+                            }}
                             />
                         </Col>
                     </Row>
