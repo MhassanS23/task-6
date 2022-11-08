@@ -2,7 +2,6 @@ import React from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
     faEnvelope,
-    faSearch,
     faUser
 } from '@fortawesome/free-solid-svg-icons'
 import {Link, Routes, Route, useNavigate} from 'react-router-dom'
@@ -11,13 +10,15 @@ import {Modal, ModalHeader, Row, ModalBody, Col} from 'reactstrap'
 import usePasswordToggles from './usePasswordToggle'
 import axios from 'axios'
 import { GoogleLogin } from '@react-oauth/google';
+import { auth, signInWithEmailAndPassword, signInWithGoogle } from "../firebase.js";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 
 
 
 const Navbars = () => {
     const navigate = useNavigate();
-    const [search, setSearch] = useState([])
+    const [user, loading, error] = useAuthState(auth);
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [firstName, setFirstname] = useState("")
@@ -156,30 +157,17 @@ const Navbars = () => {
             setErrorLastN('');
         }
     }
-        
-    
-    const submit = () => {
-        navigate(`/search/${search}`)
-    }
+     
 
     return(
     <>
     <div className="header">
         <div className="navbars">
             <div className="logo">
-                <Link to='/'><h1>Movielist</h1></Link>
+            <Link to='/all-movie' className="link-allMovie" >Popular Movie</Link>
+                <Link to='/'><h1>MV</h1></Link>
+                <Link to='/all-movie' className="link-allMovie" >All Movie</Link>
             </div>
-            <form className="container-form" >
-                <input 
-                type="text" 
-                placeholder="What Do You Want To Watch?" 
-                className="search"
-                value = {search.original_title}
-                onChange={(e) => setSearch(e.target.value)}
-                />
-                {console.log(search)}
-                <button  className="btn-search" onClick={submit}><FontAwesomeIcon icon={faSearch} /></button>
-            </form>
             {loggedIn ?  
                 <div className="menu2">
                     <span><FontAwesomeIcon icon={faUser} /></span>

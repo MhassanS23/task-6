@@ -6,7 +6,7 @@ import {Link, useNavigate} from 'react-router-dom'
 
 
 const Cards = ({movie}) => {
-    let IMG_BASEURL = "https://image.tmdb.org/t/p/w500";
+    let IMG_BASEURL = "https://image.tmdb.org/t/p/original";
     const navigate = useNavigate();
     return(
     <>

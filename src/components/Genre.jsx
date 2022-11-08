@@ -34,11 +34,11 @@ const Genres = () => {
       <Navbars/>
       <img src={logo}/>
       <div className="tulisan-pojok-img">
-        <h1>Genre</h1>
+      <h1>{`Search Result "${cat.toUpperCase()}"`}</h1>
       </div>
     </div>
     <div className="tulisan-pojok">
-    <h1>Genre</h1>
+      <h1>{`Search Result "${cat.toUpperCase()}"`}</h1>
     </div>
       <div className="containerHome">
       <div className="card-grid">

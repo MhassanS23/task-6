@@ -14,7 +14,6 @@ const Searchs = () => {
     const functionSearch = async(e) => {
         try {
           const res = await axios.get(`https://api.themoviedb.org/3/search/movie?&api_key=8c60b3b49802b54dd5f23e9f9e0d92b6&query=${name}`);
-          console.log(res)
           setSearch(res.data.results)
         } catch (error) {
           console.error(error)
