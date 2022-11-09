@@ -490,6 +490,9 @@ input::placeholder{
 
 
 @media screen and (max-width: 476px){
+  .App{
+    width: 100%;
+  }
 
   .header{
     width: 100%;
@@ -510,27 +513,32 @@ input::placeholder{
   
   .home-background h1{
     position: absolute;
-    top: 16rem;
-    left: 2.5rem;
-    font-size: 4rem;
+    top: 14rem;
+    right: 1rem;
+    left: 1rem;
+    font-size: 3rem;
+    text-align: center;
   }
   
   .home-background h5{
     position: absolute;
-    top: 20rem;
+    top: 17rem;
     letter-spacing: 0.2rem;
-    left: 1.5rem;
+    left: 1rem;
+    right: 1rem;
     font-family: 'Montserrat', sans-serif;
     color: red;
+    text-align: center;
   }
   
 
   .container-form {
-    width: 19rem;
+    width: 21rem;
     height: 3rem;
     position: absolute;
-    top: 23rem;
-    left: 5rem;
+    top: 20rem;
+    left: 3rem;
+    right: 3rem;
     border: 1px solid rgb(247, 53, 53);
     border-radius: 2rem;
     display: grid;
@@ -540,7 +548,7 @@ input::placeholder{
   .swiper-home{
     width: 100%;
     position: absolute;
-    top: 28rem;
+    top: 25rem;
     left: 0rem;
     right: 3rem;
     padding: 1.5rem;
@@ -558,5 +566,48 @@ input::placeholder{
   .swiper-home .card img{
     height: 100%;
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 375px){
+  .home-background h1{
+    left: 1rem;
+    right: 1rem;
+    font-size: 3rem;
+    text-align: center;
+  }
+  
+  .home-background h5{
+    left: 1rem;
+    right: 1.5rem;
+    font-size: 1rem;
+    text-align: center;
+    top: 17rem;
+  }
+  .container-form{
+    left: 2rem;
+    right: 1rem;
+    width: 19rem;
+  }
+}
+
+@media screen and (max-width: 320px){
+  .home-background h1{
+    left: 2.5rem;
+    right: 2rem;
+    font-size: 2.4rem;
+    text-align: center;
+  }
+  
+  .home-background h5{
+    text-align: center;
+    left: 0.5rem;
+    right: 0.5rem;
+    font-size: 0.8rem;
+    top: 16rem;
+  }
+  .container-form{
+    left: 1rem;
+    width: 18rem;
   }
 }
