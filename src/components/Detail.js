@@ -80,11 +80,13 @@ export default function Detail(){
 
           <div className="movie-genre-container">
             <h4>Genre</h4>
-            {movies && movies.genres ? movies.genres.map(genre=>(
-                <><span className="movie-genre"  onClick={()=>{
-                  navigate(`/genre/${genre.id}`)
-                }}>{genre.name}</span></>
-            )) : ""}
+            <div className="gen">
+              {movies && movies.genres ? movies.genres.map(genre=>(
+                  <><span className="movie-genre"  onClick={()=>{
+                    navigate(`/genre/${genre.id}`)
+                  }}>{genre.name}</span></>
+              )) : ""}
+            </div>
           </div>
       </div>
 
