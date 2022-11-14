@@ -5,6 +5,7 @@ import Cards from './Card.jsx'
 import {useParams} from 'react-router-dom'
 import Navbars from './Navbar'
 import logo from './back1.jpg'
+import Categories from './Category.jsx'
 
 
 const Searchs = () => {
@@ -25,20 +26,18 @@ const Searchs = () => {
       }, [])
     return(
     <>
-    <div className="search-header">
-      <Navbars/>
-      <img src={logo}/>
-      <div className="tulisan-pojok-img">
-        <h1>{`Search Result "${name.toUpperCase()}"`}</h1>
-      </div>
+    <div className="navAtas">
+        <Navbars/>
+        <Categories/>
     </div>
-    <div className="tulisan-pojok">
-    <h1>{`Search Result "${name.toUpperCase()}"`}</h1>
-    </div>
+
     {search.length == 0 ? 
     <h3 className="notfound">FILM NYA GK ADA BANG</h3>
     : 
     <div className="containerHome">
+      <div className="tulisan-pojok-search">
+        <h1>{`Search Result ${name.toUpperCase()}`}</h1>
+      </div>
      <div className="card-grid">
       {search.length > 0 && search.map(film =>{
         return<Cards movie = {film}/>

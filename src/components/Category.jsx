@@ -24,7 +24,7 @@ const Categories = () => {
     
     return(
     <>
-    <div className="header-listMovie">
+    {/* <div className="header-listMovie">
             <div className="navbars">
                 <div className="category-movie">
                     <h2>Browse by Category</h2>
@@ -33,10 +33,10 @@ const Categories = () => {
                     <Link to='/all-movie' className="link-allMovie" >See All Movie</Link>
                 </div>
             </div>
-    </div>
+    </div> */}
     <div className="container-category">
     <Swiper
-      slidesPerView={8}
+      slidesPerView={6}
       onSlideChange={() => console.log('slide change')}
       onSwiper={(swiper) => console.log(swiper)}
     >

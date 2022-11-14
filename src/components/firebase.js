@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-
 import {
   GoogleAuthProvider,
   getAuth,
@@ -18,22 +17,20 @@ import {
   addDoc,
 } from "firebase/firestore";
 
-
+//firebaseconfig
 const firebaseConfig = {
-    apiKey: "AIzaSyBFVLf9KN1PbPlD82_Iqbl8RAq5pkKCIKQ",
-    authDomain: "movie-login-b423b.firebaseapp.com",
-    projectId: "movie-login-b423b",
-    storageBucket: "movie-login-b423b.appspot.com",
-    messagingSenderId: "62429124253",
-    appId: "1:62429124253:web:cc75e21eee61cfd8d66674",
-    measurementId: "G-ELQ030YQYZ"
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
   };
-  
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
-
 const signInWithGoogle = async () => {
   try {
     const res = await signInWithPopup(auth, googleProvider);
@@ -48,6 +45,11 @@ const signInWithGoogle = async () => {
         email: user.email,
       });
     }
+    localStorage.setItem('isLoggedin', true)
+    localStorage.setItem('token', JSON.stringify(user.accessToken));
+    localStorage.setItem('profile', JSON.stringify(user.displayName));
+    window.location.reload()
+    console.log(user)
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -55,7 +57,11 @@ const signInWithGoogle = async () => {
 };
 const logInWithEmailAndPassword = async (email, password) => {
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    const res = await signInWithEmailAndPassword(auth, email, password);
+    console.log(res)
+    localStorage.setItem('isLoggedin', true)
+    localStorage.setItem('token', JSON.stringify(res.user.accessToken));
+    localStorage.setItem('profile', JSON.stringify(res.user.displayName));
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -88,7 +94,6 @@ const sendPasswordReset = async (email) => {
 const logout = () => {
   signOut(auth);
 };
-
 export {
   auth,
   db,
@@ -97,4 +102,5 @@ export {
   registerWithEmailAndPassword,
   sendPasswordReset,
   logout,
+  signInWithEmailAndPassword,
 };

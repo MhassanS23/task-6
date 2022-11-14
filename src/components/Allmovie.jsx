@@ -7,6 +7,7 @@ import {useNavigate} from 'react-router-dom'
 import logo from './back1.jpg'
 import {useDispatch, useSelector} from 'react-redux'
 import {fetchMovies} from '../features/movies/moviesSlice'
+import Categories from './Category.jsx'
 
 
 const Allmovies = () => {
@@ -18,19 +19,23 @@ const Allmovies = () => {
     
     return(
     <>
-    <div className="search-header">
-      <Navbars/>
-      <img src={logo}/>
+    <div className="navAtas">
+        <Navbars/>
+        <Categories/>
+    </div>
+    {/* <div className="search-header">
+    </div> */}
+      {/* <img src={logo}/>
       <div className="tulisan-pojok-img">
         <h1>ALL MOVIES</h1>
       </div>
-    </div>
 
-    <div className="tulisan-pojok">
-        <h1>All Movies</h1>
-    </div>
+     */}
 
     <div className="containerHome">
+        <div className="tulisan-pojok">
+            <h1>All Movies</h1>
+        </div>
         <div className="card-grid">
         {movies.length > 0 && movies.map(film =>{
             return<Cards movie = {film} />

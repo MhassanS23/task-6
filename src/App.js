@@ -7,37 +7,67 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Carouselfilms from './components/Carouselfilm.js'
 import Navbars from './components/Navbar.jsx'
 import Headers from './components/Header'
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import {Navigation, Thumbs, Pagination} from 'swiper'
 import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 import Card from 'react-bootstrap/Card';
 import Categories from './components/Category'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import {useDispatch, useSelector} from 'react-redux'
-import {fetchMovies, fetchGenre} from './features/movies/moviesSlice'
+import {fetchMovies, getPopular, getToprated} from './features/movies/moviesSlice'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
+  faLinesLeaning,
     faSearch
 } from '@fortawesome/free-solid-svg-icons'
+import Skeleton, {SkeletonTheme} from 'react-loading-skeleton'
 
 
 function App() {
-  const movies = useSelector(state=> state.movies.movies)
+  const [mov, setMov] = useState('')
+  const [isLoading, setIsloading] = useState(true)
   const [search, setSearch] = useState([])
-  const dispatch = useDispatch();
+  const [status, setStatus] = useState('')
   useEffect(()=>{
-    dispatch(fetchMovies());
-  }, [dispatch]);
+    setTimeout(()=>{
+      setIsloading(false)
+    }, 1500)
+  },[])
+
+  useEffect(()=>{
+    getFilms();
+  }, []);
+
   let IMG_BASEURL = "https://image.tmdb.org/t/p/original";
   const navigate = useNavigate();
   const submit = () => {
     navigate(`/search/${search}`)
-}
+  }
+
+  const genFilms = async(film) => {
+    try{
+        const response = await axios.get(`https://api.themoviedb.org/3/movie/${film}?api_key=8c60b3b49802b54dd5f23e9f9e0d92b6`);
+        setMov(response.data.results)
+    }catch(error){
+        console.log(error)
+    }
+  }
+
+  const getFilms = async () => {
+    try{
+      const response = await axios.get("https://api.themoviedb.org/3/discover/movie?&api_key=8c60b3b49802b54dd5f23e9f9e0d92b6");
+      setMov(response.data.results)
+    } catch(error){
+        console.log(error)
+    }
+  }
 
 
   return (
     <div className="App">
-    <GoogleOAuthProvider clientId="414434174427-nic0jjfbcvqaubflqajvvs5gedceip02.apps.googleusercontent.com">
     <Navbars/>
     <div className="home-background">
       <img src="https://image.tmdb.org/t/p/original/r17jFHAemzcWPPtoO0UxjIX0xas.jpg"/>
@@ -53,26 +83,40 @@ function App() {
                 />
                 <button  className="btn-search" onClick={submit}><FontAwesomeIcon icon={faSearch} /></button>
             </form>
+      <div className="opsion">
+        <span ><a onClick={()=> genFilms('popular')}>Popular Movie</a></span>
+        <span ><a onClick={()=> genFilms('top_rated')}>TopRated Movie</a></span>
+      </div>
       <div className="swiper-home">
-          <Swiper
-          modules={[Navigation, Thumbs, Pagination]}
+      <Swiper
+          modules={[Navigation]}
           slidesPerView={2}
           spaceBetween={1}
           navigation={true}
-          pagination={{ clickable: true }}
           onSlideChange={() => console.log('slide change')}
           onSwiper={(swiper) => console.log(swiper)}
-          key={movies.id}
+          key={mov.id}
         >
-          {movies.length > 0 && movies.map(film =>{
-              return<SwiperSlide ><Card key={film.id}>
-              <Card.Img variant="top" src={IMG_BASEURL+film.backdrop_path} onClick={()=>navigate(`/${film.id}`)}/>
-          </Card></SwiperSlide>
+          {mov.length > 0 && mov.map(film =>{
+              return<SwiperSlide >
+                <>
+                {isLoading ? 
+                    <div>
+                    <SkeletonTheme color="#202020" highlightColor="#444">
+                        <Skeleton width={'20rem'} height={'10rem'} duration={3} />
+                    </SkeletonTheme>
+                    </div>
+                : 
+                    <Card key={film.id}>
+                      <Card.Img variant="top" src={IMG_BASEURL+film.backdrop_path} onClick={()=>navigate(`/${film.id}`)}/>
+                    </Card>
+                }   
+                </>
+              </SwiperSlide>
           })}
         </Swiper>
       </div>
     </div>
-    </GoogleOAuthProvider>
     </div>
   );
 }

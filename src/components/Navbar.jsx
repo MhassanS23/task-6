@@ -8,9 +8,7 @@ import {Link, Routes, Route, useNavigate} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import {Modal, ModalHeader, Row, ModalBody, Col} from 'reactstrap'
 import usePasswordToggles from './usePasswordToggle'
-import axios from 'axios'
-import { GoogleLogin } from '@react-oauth/google';
-import { auth, signInWithEmailAndPassword, signInWithGoogle } from "../firebase.js";
+import { auth, signInWithEmailAndPassword, signInWithGoogle, logInWithEmailAndPassword, registerWithEmailAndPassword, logout } from "./firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 
@@ -18,14 +16,22 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 const Navbars = () => {
     const navigate = useNavigate();
-    const [user, loading, error] = useAuthState(auth);
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [firstName, setFirstname] = useState("")
+    let dataLogin = {
+        email: email,
+        password: password,
+    }
+    const [name, setName] = useState("")
     const [lastName, setLastname] = useState("")
     const [emailRegis, setEmailregis] = useState("")
     const [passRegis, setPasswordregis] = useState("")
     const [passConfir, setPasswordconfir] = useState("")
+    const dataRegister = {
+        last_name: name,
+        email: emailRegis,
+        password: passRegis,
+    }
     const [modal, setModal] = useState(false)
     const [modal2, setModal2] = useState(false)
     const [modal3, setModal3] = useState(false)
@@ -40,77 +46,43 @@ const Navbars = () => {
     const [Error, setError] = useState('')
     const loggedIn = localStorage.getItem('isLoggedin');
     const profilNama = localStorage.getItem('profile');
+    const Token = localStorage.getItem('token');
+    const [user, loading, error] = useAuthState(auth);
 
-    const handleSubmit = async (e) =>{
-        e.preventDefault();
-        try {
-        const res = await axios.post("https://notflixtv.herokuapp.com/api/v1/users/login",{email : email, password : password,});
-        localStorage.setItem('token', JSON.stringify(res.data.data));
-        localStorage.setItem('isLoggedin', true)
-        console.log(res)
-        setEmail('');
-        setPassword('');
-        setModal(false)
-        localStorage.setItem('profile', `${res.data.data.first_name} ${res.data.data.last_name}`);
-        } catch (error) {
-            if(error.response.data.statusCode == 422){
-                setError('Please fill the Form')
-                setModal3(true)
-            }else if(error.response.data.statusCode == 400){
-                setError('Account not Registered or Email and Password not Match')
-                setModal3(true)
-            }else{
-                setError('Registration Failed')
-                setModal3(true)
-            }
-        }
+    const handleSubmit = async (value) =>{
+       value.preventDefault();
+    // dispatch(loginUser(dataLogin))
+       logInWithEmailAndPassword(email, password)
+       setModal(false)
     }
 
 
     const signout = () => {
+        logout();
         localStorage.removeItem('isLoggedin')
         localStorage.removeItem('token')
         localStorage.removeItem('profile')
         navigate('/')
     }
 
+    const submitLogin = () => {
+    // dispatch(googleLogin(credential))
+    setModal(false)
+  };
+
     
 
     const handleRegis = async (e) =>{
         e.preventDefault();
         checkFirstname();
-        checkLastname();
         checkEmail();
         checkPass();
-        checkPassCon();
-        try {
-        const res = await axios.post("https://notflixtv.herokuapp.com/api/v1/users",
-        {
-            first_name: firstName,
-            last_name: lastName,
-            email: emailRegis,
-            password: passRegis,
-            password_confirmation: passConfir,
-        });
-        localStorage.setItem('user', JSON.stringify(res.data.data));
-        setFirstname('');
-        setLastname('');
+        // dispatch(registerUser(dataRegister))
+        registerWithEmailAndPassword(name, emailRegis, passRegis)
+        setName('');
         setEmailregis('');
         setPasswordregis('');
-        setPasswordconfir('');
         setModal2(false)
-        } catch (error) {
-            if(error.response.data.statusCode == 422){
-                setError('Please fill the Form')
-                setModal3(true)
-            }else if(error.response.data.statusCode == 400){
-                setError('Email Already Registered')
-                setModal3(true)
-            }else{
-                setError('Registration Failed')
-                setModal3(true)
-            }
-        }
     }
 
     const checkEmail = () => {
@@ -143,8 +115,8 @@ const Navbars = () => {
     }
 
     const checkFirstname = () => {
-        if(firstName == ''){
-            setErrorFirstN('Please fill First Name')
+        if(name == ''){
+            setErrorFirstN('Please fill Name')
         }else{
             setErrorFirstN('');
         }
@@ -227,18 +199,7 @@ const Navbars = () => {
                         </Col>
                         <Col className="button-form-login">
                             <button className="submit" type='submit'>Login</button>
-                            <GoogleLogin
-                            onSuccess={credentialResponse => {
-                                console.log(credentialResponse);
-                                localStorage.setItem('token', JSON.stringify(credentialResponse.credential));
-                                localStorage.setItem('isLoggedin', true)
-                                localStorage.setItem('profile', "Google User");
-                                setModal(false)
-                            }}
-                            onError={() => {
-                                console.log('Login Failed');
-                            }}
-                            />
+                            <button className="submit" onClick={signInWithGoogle}>Login With Google</button>
                         </Col>
                     </Row>
                 </form>
@@ -259,16 +220,9 @@ const Navbars = () => {
                     <Row>
                         <Col lg={12}>
                             <div>
-                                <input type='text' className='form-control' placeholder='First Name' onChange={(e) => setFirstname(e.target.value)} />
+                                <input type='text' className='form-control' placeholder='Name' onChange={(e) => setName(e.target.value)} />
                                 <p className="error">{errFirstN}</p>
                                 <span className="user1"><FontAwesomeIcon icon={faUser} /></span>
-                            </div>
-                        </Col>
-                        <Col lg={12}>
-                            <div>
-                                <input type='text' className='form-control' placeholder='Last Name' onChange={(e) => setLastname(e.target.value)} />
-                                <p className="error">{errLastN}</p>
-                                <span className="user2"><FontAwesomeIcon icon={faUser} /></span>
                             </div>
                         </Col>
                         <Col lg={12}>
@@ -284,15 +238,6 @@ const Navbars = () => {
                                 <p className="error">{errPass}</p>
                                 <span className="password-toggle-icon1">
                                 {ToggleIcon}
-                                </span>
-                            </div>
-                        </Col>
-                        <Col lg={12}>
-                            <div>
-                                <input type={PasswordInputType2} className='form-control' placeholder='Password Confirmation' onChange={(e) => setPasswordconfir(e.target.value)} />
-                                <p className="error">{errPassCon}</p>
-                                <span className="password-toggle-icon2">
-                                {ToggleIcon2}
                                 </span>
                             </div>
                         </Col>

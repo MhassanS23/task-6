@@ -30,17 +30,14 @@ const Genres = () => {
 
     return(
     <>
-    <div className="search-header">
-      <Navbars/>
-      <img src={logo}/>
-      <div className="tulisan-pojok-img">
-      <h1>{`Search Result "${cat.toUpperCase()}"`}</h1>
-      </div>
+    <div className="navAtas">
+        <Navbars/>
     </div>
-    <div className="tulisan-pojok">
-      <h1>{`Search Result "${cat.toUpperCase()}"`}</h1>
-    </div>
+
       <div className="containerHome">
+        <div className="tulisan-pojok-genre">
+          <h1>{`Genre Result`}</h1>
+        </div>
       <div className="card-grid">
         {genre.map((mov)=>{
           return<Cards movie={mov}/>
