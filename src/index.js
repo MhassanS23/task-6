@@ -7,6 +7,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Detail from './components/Detail.js'
 import Searchs from './components/Search.jsx'
 import Allmovies from './components/Allmovie.jsx'
+import Popularmovies from './components/Popularmovie.jsx'
 import Genres from './components/Genre.jsx'
 import {store} from './app/store';
 import {Provider} from 'react-redux';
@@ -21,6 +22,7 @@ root.render(
           <Route path="/:id" element={<Detail/>}/>
           <Route path="/search/:name" element={<Searchs/>}/>
           <Route path="/all-movie" element={<Allmovies/>}/>
+          <Route path="/popular-movie" element={<Popularmovies/>}/>
           <Route path="/genre/:cat" element={<Genres/>}/>
         </Routes>
       </BrowserRouter>

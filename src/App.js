@@ -108,7 +108,11 @@ function App() {
                     </div>
                 : 
                     <Card key={film.id}>
-                      <Card.Img variant="top" src={IMG_BASEURL+film.backdrop_path} onClick={()=>navigate(`/${film.id}`)}/>
+                      <Card.Img variant="top" src={IMG_BASEURL+film.backdrop_path}/>
+                      <div className="intro" onClick={()=>navigate(`/${film.id}`)}>
+                        <h4>{film.title}</h4>
+                        <p>{film.overview}</p>
+                      </div>
                     </Card>
                 }   
                 </>

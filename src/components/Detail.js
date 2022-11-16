@@ -9,6 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import castAvatars from './castAvatar.png'
 
 
 export default function Detail(){
@@ -44,6 +45,9 @@ export default function Detail(){
 
     return(
     <>
+    <div className="navAtas">
+        <Navbars/>
+    </div>
     <div className="container-detail">
       <div className="detail-film">
         {movies &&
@@ -100,12 +104,20 @@ export default function Detail(){
       spaceBetween={5}
       onSlideChange={() => console.log('slide change')}
       onSwiper={(swiper) => console.log(swiper)}
+      breakpoints={{
+        0: {
+          slidesPerView: 3,
+        },
+        364: {
+          slidesPerView: 4,
+        },
+      }}
       className="cast-slider"
     >
       {cast.length > 0 && cast.map(caster =>{
           return<SwiperSlide >
             <div className="cast-movie">
-              <img className="cast-img" src={caster.profile_path ? `https://image.tmdb.org/t/p/original/${caster.profile_path}` : "Picture"} alt={caster.name}/>
+              <img className="cast-img" src={caster.profile_path !== null ? `https://image.tmdb.org/t/p/original/${caster.profile_path}` :  `${castAvatars}`}/>
               <h4>{caster.name}</h4>
             </div>
           </SwiperSlide>

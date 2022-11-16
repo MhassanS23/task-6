@@ -136,7 +136,7 @@ const Navbars = () => {
     <div className="header">
         <div className="navbars">
             <div className="logo">
-            <Link to='/all-movie' className="link-allMovie" >Popular Movie</Link>
+            <Link to='/popular-movie' className="link-allMovie" >Popular Movie</Link>
                 <Link to='/'><h1>MV</h1></Link>
                 <Link to='/all-movie' className="link-allMovie" >All Movie</Link>
             </div>

@@ -12,6 +12,7 @@
 .home-background img{
   width: 100%;
   height: 100vh;
+  position: relative;
 }
 
 .home-background h1{
@@ -56,7 +57,45 @@
   width: 100%;
 }
 
+.swiper-home .card .intro{
+  width: 100%;
+  height: 3rem;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  background: transparent;
+  transition: .6s;
+}
 
+.swiper-home .card .intro h4{
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.swiper-home .card .intro p{
+  width: 100%;
+  font-size: 0.7rem;
+  visibility: hidden;
+  opacity: 0;
+  text-align: center;
+  color: whitesmoke;
+  padding-bottom: 0.2rem;
+}
+
+.swiper-home .card:hover{
+  cursor: pointer;
+}
+
+.swiper-home .card:hover .intro{
+  width: 100%;
+  height: 100%;
+  background: rgba(14, 13, 13, 0.5);
+}
+
+.swiper-home .card:hover p{
+  visibility: visible;
+  opacity: 1;
+}
 
 .carousel-item img{
   width: 100%;
@@ -147,7 +186,8 @@ input::placeholder{
 .containerHome{
   width: 100%;
   height: 100vh;
-  background-image: linear-gradient(170deg,rgb(0, 0, 27)40%,rgb(224, 216, 216));
+  background-image: linear-gradient(170deg,black,rgb(0, 0, 27)40%,rgb(224, 216, 216));
+  /* background-image:linear-gradient(170deg,black,rgb(128, 12, 12), white ); */
   padding: 5rem;
   display: flex;
   justify-content: center;
@@ -162,10 +202,18 @@ input::placeholder{
   margin-top: 3.5rem;
   display: grid;
   grid-template-columns: repeat(4,1fr);
-  row-gap: 1rem;
+  row-gap: 2rem;
   cursor: pointer;
 }
 
+.card-grid .card{
+  height: 14rem;
+}
+
+.card-grid .card img{
+  height: 100%;
+  border-radius: 5px;
+}
 
 
 .navAtas .navbars .logo h1{
@@ -204,21 +252,34 @@ input::placeholder{
   border: 1px solid rgb(247, 53, 53);
   color: white;
   border-radius: 2rem;
-  background-color: rgb(247, 53, 53);
+  background-image: linear-gradient( rgb(247, 53, 53), black);
   width: 6.5rem;
   padding: 0.5rem;
   margin-right: 1rem;
+}
+
+.register:hover{
+  background-image: linear-gradient( 170deg,black,rgb(247, 53, 53), black);
+}
+
+.login:hover{
+  background-image: linear-gradient(rgb(4, 4, 44), black);
+  border: 1px solid rgb(151, 141, 141);
 }
 
 .tombol-trailer{
   border: 1px solid rgb(247, 53, 53);
   color: white;
   border-radius: 1rem;
-  background-color: rgb(247, 53, 53);
+  background-image: linear-gradient( rgb(247, 53, 53), black);
   width: 11rem;
   padding: 0.5rem;
   margin-top: 1rem;
   margin-right: 1rem;
+}
+
+.tombol-trailer:hover{
+  background-image: linear-gradient( black,rgb(247, 53, 53));
 }
 
 .tombol-trailer a{
@@ -255,7 +316,7 @@ input::placeholder{
 }
 
 .movie-genre:hover{
-  background-color: rgb(75, 68, 68);
+  background-image: linear-gradient( black,rgb(247, 53, 53));
   color: white;
 }
 
@@ -340,17 +401,13 @@ input::placeholder{
 }
 
 .cast-background{
-  width: 50vw;
+  width: 100%;
   height: 100%;
-  position: relative;
-  top: -3rem;
   color: white;
-  margin-left: 20rem;
-  background-color:#02001e;
+  /* background-image:linear-gradient(black,#02001e,rgb(10, 10, 75)); */
+  background-image:linear-gradient(black,rgb(51, 3, 3),rgb(128, 12, 12));
   text-align: center;
   padding: 1rem;
-  border-top-left-radius: 2rem;
-  border-top-right-radius: 2rem;
 }
 
 .cast-slider {
@@ -362,6 +419,10 @@ input::placeholder{
 .cast-slider .swiper-wrapper{
   margin: 0;
   padding: 0;
+}
+
+.cast-slider .swiper-wrapper .cast-img{
+  cursor: pointer;
 }
 
 .fa-star{
@@ -472,6 +533,10 @@ input::placeholder{
   border: 1px solid rgb(247, 53, 53);
   padding: 0.2rem;
   color: white;
+}
+
+.btn-category:hover{
+  background-image:  linear-gradient(160deg,rgb(197, 185, 185) ,rgb(170, 26, 26));
 }
 
 .logo a{
@@ -666,7 +731,7 @@ input::placeholder{
   .swiper-home{
     width: 100%;
     position: absolute;
-    top: 25rem;
+    top: 27rem;
     left: 0rem;
     right: 3rem;
     padding: 1.5rem;
@@ -710,12 +775,21 @@ input::placeholder{
 
   .container-overviewGenre{
     display: grid;
-    grid-template-columns: 50% 50%;
-    margin-left: 2rem;
+    grid-template-columns: 60% 40%;
     margin-top: -1rem;
+    gap: 0.5rem;
+  }
+
+  .container-overviewGenre .preview-film{
+    margin-left: 0.5rem;
+  }
+
+  .movie-genre-container{
+    width: 90%;
   }
 
   .movie-genre-container .gen{
+    width: 90%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     row-gap: 1rem;
@@ -741,6 +815,38 @@ input::placeholder{
     left: auto;
     color: white;
   }
+
+  .container-category{
+    left: 2rem;
+    top: 7rem;
+    width: 75%;
+  }
+
+  .card-grid{
+    grid-template-columns: repeat(2, 1fr);
+    height: 84%;
+    margin-top: 7rem;
+  }
+
+  .containerHome{
+    gap: 1rem;
+    padding: 4rem;
+  }
+
+  .tulisan-pojok h1{
+    top: 7rem;
+    left: 0;
+  }
+
+  .tulisan-pojok-genre h1{
+    left: 0;
+    top: 5.5rem;
+  }
+
+  .tulisan-pojok-search h1 {
+    left: 0.5rem;
+    top: 6rem;
+  }
 }
 
 @media screen and (max-width: 425px){
@@ -749,6 +855,34 @@ input::placeholder{
   }
   .opsion{
     left: 5rem;
+  }
+  .containerHome {
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .card-grid{
+    height: 75%;
+    margin-top: 10rem;
+  }
+
+  .container-category{
+    left: 3rem;
+  }
+
+  .container-category .swiper-wrapper {
+    margin-left: 2rem;
+    padding: 1rem;
+  }
+
+  .tulisan-pojok-search h1 {
+    left: 0rem;
+  }
+}
+
+@media screen and (max-width: 415px){
+  .card-grid{
+    grid-template-columns: repeat(1, 1fr);
+    margin-left: 5rem;
   }
 }
 
@@ -782,12 +916,31 @@ input::placeholder{
   }
 
   .detail-film .tombol-trailer{
-    margin-left: 1rem;
+    margin-left: 6rem;
+    margin-top: 5rem;
   }
 
   .container-overviewGenre{
     margin-left: 1rem;
-    margin-top: -2rem;
+  }
+
+  .movie-genre-container .gen{
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .container-category .swiper-wrapper {
+    margin-left: 1rem;
+    padding: 1rem;
+  }
+
+  .card-grid{
+    grid-template-columns: repeat(1, 1fr);
+    margin-left: 0rem;
+  }
+
+  .containerHome{
+    gap: 5.5rem;
+    padding: 2rem;
   }
 }
 
@@ -817,9 +970,9 @@ input::placeholder{
   }
 
   .container-overviewGenre{
-    margin-top: -1rem;
+    margin-top:3.5rem;
     margin-left:0.5rem;
-    gap: 0;
+    gap: 0.5rem;
   }
 
   .ratingDate-container{
@@ -832,12 +985,30 @@ input::placeholder{
 
   .detail-film .tombol-trailer{
     margin-top: 1rem;
-    margin-left: 4rem;
+    margin-left: 4.5rem;
   }
 
   .movie-genre-container .gen{
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     row-gap: 1rem;
+  }
+
+  .container-category .swiper-wrapper {
+    margin-left: 0.5rem;
+    padding: 1rem;
+  }
+
+  .containerHome{
+    gap: 4.5rem;
+    padding: 2rem;
+  }
+
+  .swiper-home .card .intro h4{
+    font-size: 0.9rem;
+  }
+  
+  .swiper-home .card .intro p{
+    font-size: 0.5rem;
   }
 }

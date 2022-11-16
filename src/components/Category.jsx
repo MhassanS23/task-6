@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import {useDispatch, useSelector} from 'react-redux'
 import {fetchGenre} from '../features/movies/moviesSlice'
+import { Navigation} from 'swiper';
 
 
 
@@ -39,6 +40,20 @@ const Categories = () => {
       slidesPerView={6}
       onSlideChange={() => console.log('slide change')}
       onSwiper={(swiper) => console.log(swiper)}
+      breakpoints={{
+        768: {
+          slidesPerView: 6,
+        },
+        476: {
+          slidesPerView: 2,
+        },
+        375: {
+          slidesPerView: 2,
+        },
+        320: {
+          slidesPerView: 2,
+        },
+      }}
     >
       {genres.length > 0 && genres.map(list =>{
           return<SwiperSlide ><button  onClick={()=> enter(list.id)} className="btn-category"

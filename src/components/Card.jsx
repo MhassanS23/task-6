@@ -22,7 +22,7 @@ const Cards = ({movie}) => {
     {isLoading ? 
         <div>
         <SkeletonTheme color="#202020" highlightColor="#444">
-            <Skeleton width={'10rem'} height={'15rem'} duration={2} />
+            <Skeleton width={'10rem'} height={'14rem'} duration={2} />
         </SkeletonTheme>
         </div>
     : 
