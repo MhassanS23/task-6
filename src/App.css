@@ -9,10 +9,18 @@
   width: 100%;
 }
 
-.home-background img{
+.footer p{
+  width: 80%;
+  position: absolute;
+  bottom: 0;
+  left: 31rem;
+  color:  rgb(247, 53, 53);
+}
+
+.home-background .gambar{
   width: 100%;
   height: 100vh;
-  position: relative;
+  object-fit: cover;
 }
 
 .home-background h1{
@@ -697,6 +705,11 @@ input::placeholder{
     font-size: 3rem;
     text-align: center;
   }
+
+  .footer p{
+    left: 3rem;
+    text-align: center;
+  }
   
   .home-background h5{
     position: absolute;
@@ -770,18 +783,26 @@ input::placeholder{
   }
   
   .detail-film .tombol-trailer{
-    margin-left: 2rem;
+    margin-left: 9rem;
   }
 
   .container-overviewGenre{
     display: grid;
     grid-template-columns: 60% 40%;
-    margin-top: -1rem;
-    gap: 0.5rem;
+    margin-top: -2.5rem;
+    gap: 1rem;
   }
 
   .container-overviewGenre .preview-film{
     margin-left: 0.5rem;
+  }
+
+  .container-overviewGenre .preview-film p{
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: justify;
   }
 
   .movie-genre-container{
@@ -791,7 +812,7 @@ input::placeholder{
   .movie-genre-container .gen{
     width: 90%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     row-gap: 1rem;
   }
 
@@ -851,7 +872,7 @@ input::placeholder{
 
 @media screen and (max-width: 425px){
   .container-form {
-    left: 3.5rem;
+    left: 3rem;
   }
   .opsion{
     left: 5rem;
@@ -877,12 +898,34 @@ input::placeholder{
   .tulisan-pojok-search h1 {
     left: 0rem;
   }
+
+  .detail-film .tombol-trailer{
+    margin-left: 7rem;
+  }
+}
+
+@media screen and (max-width: 400px){
+  .container-form {
+    left: 2rem;
+  }
+  .opsion{
+    left: 4rem;
+  }
 }
 
 @media screen and (max-width: 415px){
   .card-grid{
     grid-template-columns: repeat(1, 1fr);
     margin-left: 5rem;
+  }
+}
+
+@media screen and (max-width: 412px){
+  .container-overviewGenre .preview-film p{
+    -webkit-line-clamp: 7;
+  }
+  .movie-genre-container .gen{
+    row-gap: 0.5rem;
   }
 }
 
@@ -917,7 +960,7 @@ input::placeholder{
 
   .detail-film .tombol-trailer{
     margin-left: 6rem;
-    margin-top: 5rem;
+    margin-top: 0.5rem;
   }
 
   .container-overviewGenre{
@@ -970,28 +1013,32 @@ input::placeholder{
   }
 
   .container-overviewGenre{
-    margin-top:3.5rem;
+    margin-top:0rem;
     margin-left:0.5rem;
-    gap: 0.5rem;
+    gap: 1rem;
   }
 
   .ratingDate-container{
     margin-top: 1rem;
   }
 
-  .detail .title-film h1{
-    font-size: 2rem;
-  }
-
   .detail-film .tombol-trailer{
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     margin-left: 4.5rem;
   }
+
+  .title-film h1 {
+    font-size: 3rem;
+}
 
   .movie-genre-container .gen{
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     row-gap: 1rem;
+  }
+
+  .container-overviewGenre .preview-film p{
+    -webkit-line-clamp: 10;
   }
 
   .container-category .swiper-wrapper {

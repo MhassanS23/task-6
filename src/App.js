@@ -14,6 +14,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Card from 'react-bootstrap/Card';
+import Footers from './components/Footer'
 import Categories from './components/Category'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import {useDispatch, useSelector} from 'react-redux'
@@ -70,7 +71,7 @@ function App() {
     <div className="App">
     <Navbars/>
     <div className="home-background">
-      <img src="https://image.tmdb.org/t/p/original/r17jFHAemzcWPPtoO0UxjIX0xas.jpg"/>
+      <img className='gambar' src="https://image.tmdb.org/t/p/original/r17jFHAemzcWPPtoO0UxjIX0xas.jpg"/>
       <h1>JOHN WICK</h1>
       <h5>Never stab the devil in the back</h5>
           <form className="container-form" >
@@ -121,6 +122,7 @@ function App() {
         </Swiper>
       </div>
     </div>
+    <Footers/>
     </div>
   );
 }
