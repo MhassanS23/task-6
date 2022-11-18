@@ -71,7 +71,7 @@ function App() {
     <div className="App">
     <Navbars/>
     <div className="home-background">
-      <img className='gambar' src="https://image.tmdb.org/t/p/original/r17jFHAemzcWPPtoO0UxjIX0xas.jpg"/>
+      {/* <img className='gambar' src="https://image.tmdb.org/t/p/original/r17jFHAemzcWPPtoO0UxjIX0xas.jpg"/> */}
       <h1>JOHN WICK</h1>
       <h5>Never stab the devil in the back</h5>
           <form className="container-form" >

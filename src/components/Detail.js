@@ -10,6 +10,7 @@ import {
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import castAvatars from './castAvatar.png'
+import Footers from './Footer.js'
 
 
 export default function Detail(){

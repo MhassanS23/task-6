@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
 .header{
-  padding: 0rem 1rem 1rem 1rem;
+  padding: 0rem 0rem 1rem 0rem;
   position: fixed;
   z-index: 99;
   overflow: hidden;
@@ -9,18 +9,24 @@
   width: 100%;
 }
 
+.logo-bg{
+  width: 100%;
+  background-image:linear-gradient(black,rgb(128, 12, 12));
+}
+
 .footer p{
-  width: 80%;
+  width: fit-content;
   position: absolute;
   bottom: 0;
   left: 31rem;
   color:  rgb(247, 53, 53);
 }
 
-.home-background .gambar{
+.App{
+  background: url(https://image.tmdb.org/t/p/original/r17jFHAemzcWPPtoO0UxjIX0xas.jpg);
   width: 100%;
   height: 100vh;
-  object-fit: cover;
+  background-size: cover;
 }
 
 .home-background h1{
@@ -141,6 +147,7 @@
   align-items: center;
   justify-content: space-evenly;
   text-align: center;
+  margin-bottom: 0.5rem;
 }
 
 .navbars .logo h1{
@@ -202,6 +209,20 @@ input::placeholder{
   gap: 10rem;
 }
 
+.modal-header{
+  background-image: linear-gradient(160deg,black,rgb(0, 0, 27)40%,rgb(224, 216, 216));
+  color: white;
+}
+
+.modal-header .btn-close{
+  color: antiquewhite;
+}
+
+.modal-body{
+  background-image: linear-gradient(170deg,black,rgb(0, 0, 27)40%,rgb(224, 216, 216));
+  color: white;
+}
+
 .card-grid{
   width: 95%;
   height: 100%;
@@ -226,6 +247,10 @@ input::placeholder{
 
 .navAtas .navbars .logo h1{
   font-size: 2rem;
+}
+
+.navAtas .logo{
+  margin-bottom: 0;
 }
 
 .navAtas .login{
@@ -558,6 +583,7 @@ input::placeholder{
 .modal-body .form-control{
   border-radius: 2rem;
   padding: 1rem;
+  background: transparent;
 }
 
 .password-toggle-icon{
@@ -616,18 +642,19 @@ input::placeholder{
 }
 
 .submit{
-  width: 9rem;
-  background-color:  rgb(247, 53, 53);
+  width: fit-content;
+  background-image: linear-gradient( rgb(247, 53, 53), black);
   border-radius: 1rem;
-  border:  1px solid rgb(247, 53, 53);
+  border:  1px solid black;
   padding: 0.5rem;
   box-shadow: rgb(128, 121, 121);
   color: white;
+  padding: 1rem;
 }
 
 .submit:hover{
-  background-color: rgb(128, 121, 121);
-  border: white;
+  background-image:linear-gradient(rgb(128, 12, 12),rgb(51, 3, 3), black);
+  border:  1px solid black;
 }
 
 .error{
@@ -707,7 +734,7 @@ input::placeholder{
   }
 
   .footer p{
-    left: 3rem;
+    left: 1.5rem;
     text-align: center;
   }
   
@@ -834,7 +861,6 @@ input::placeholder{
   .swiper-home .swiper-button-next{
     right: 10px;
     left: auto;
-    color: white;
   }
 
   .container-category{
@@ -874,6 +900,11 @@ input::placeholder{
   .container-form {
     left: 3rem;
   }
+
+  .footer p{
+    left: 0.5rem;
+  }
+
   .opsion{
     left: 5rem;
   }

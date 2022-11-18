@@ -15,6 +15,17 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 
 const Navbars = () => {
+//change nav color
+    const [color, setColor] = useState(false)
+    const changeColor = () => {
+        if(window.scrollY >= 90){
+            setColor(true)
+        }else{
+            setColor(false)
+        }
+    }
+    window.addEventListener('scroll', changeColor) 
+
     const navigate = useNavigate();
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -133,9 +144,9 @@ const Navbars = () => {
 
     return(
     <>
-    <div className="header">
+    <div className='header'>
         <div className="navbars">
-            <div className="logo">
+            <div className={color ? 'logo logo-bg' : 'logo'}>
             <Link to='/popular-movie' className="link-allMovie" >Popular Movie</Link>
                 <Link to='/'><h1>MV</h1></Link>
                 <Link to='/all-movie' className="link-allMovie" >All Movie</Link>
